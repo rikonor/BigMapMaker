@@ -28,7 +28,7 @@ def getMainImage(filename):
 		mainImage = Image.open(filename)
 		return mainImage
 	except:
-		print "Image not found."
+		print("Image not found.")
 		exit(1)
 
 def pasteText(mainImage, textImage, pasteLocation):
@@ -46,14 +46,14 @@ def applyTextToKeymap(mainImage, text):
 def applyTextToFullMap(mainImage):
 	# get mainImage dimensions
 	xDim, yDim = mainImage.size
-	xSegments = xDim / 500
-	ySegments = yDim / 500
+	xSegments = xDim // 500
+	ySegments = yDim // 500
 	for xIndex in range(xSegments):
 		for yIndex in range(ySegments):
 			segmentText = getSegmentText(xIndex, yIndex)
 			textImage = createTextImage(segmentText)
 			xPasteLocation = xIndex * 500 + 250
-			yPasteLocation = yIndex * 500 + 250 - letterImageSize[1]/2
+			yPasteLocation = yIndex * 500 + 250 - letterImageSize[1]//2
 			pasteLocation = (xPasteLocation, yPasteLocation)
 			pasteText(mainImage, textImage, pasteLocation)
 
@@ -62,7 +62,7 @@ def saveMainImage(mainImage, filename):
 		mainImage.save(filename, quality=100, optimize=True, progressive=True)
 		# mainImage.show()
 	except:
-		print "Failed to save image."
+		print("Failed to save image.")
 		exit(1)
 
 def processImage(input_filename, output_filename="", method="keymap", keymapText = ""):
@@ -91,7 +91,7 @@ def getCoords(filenames):
 	return numsInt
 
 def processAllKeyMaps():
-	print "Attaching text to key maps."
+	print("Attaching text to key maps.")
 	filenames = getFileNames()
 	numsInt = getCoords(filenames)
 	fileNamesWithCoords = zip(filenames, numsInt)
@@ -103,7 +103,7 @@ def processAllKeyMaps():
 		processImage(filename, method="keymap", keymapText=segmentText)
 
 def processFullMap():
-	print "Attaching text to full map."
+	print("Attaching text to full map.")
 	mapFull_filename = "images/mapFullGrid.jpeg"
 	processImage(mapFull_filename, method = "fullmap")
 
