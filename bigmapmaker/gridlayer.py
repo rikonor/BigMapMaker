@@ -3,7 +3,7 @@ from PIL import Image, ImageDraw
 
 # 1 Get file from args
 if len(sys.argv) != 2:
-	print "Error: Please enter a filename."
+	print("Error: Please enter a filename.")
 	sys.exit(2)
 img = Image.open(sys.argv[1])
 
@@ -25,14 +25,14 @@ yDraw.polygon([ (0,0), (0 ,yDim) ], outline=(255,255,255,200))
 
 # paste xLine along image
 yStartIndex = 1
-yEndIndex = yDim/500
+yEndIndex = yDim//500
 for yCurrentIndex in range(yStartIndex, yEndIndex):
 	yOffset = (0, yCurrentIndex*500)
 	img.paste(xLine, yOffset, mask=xLine)
 
 # paste yLine along image
 xStartIndex = 1
-xEndIndex = xDim/500
+xEndIndex = xDim//500
 for xCurrentIndex in range(xStartIndex, xEndIndex):
 	xOffset = (xCurrentIndex*500, 0)
 	img.paste(yLine, xOffset, mask=yLine)

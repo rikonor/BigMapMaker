@@ -9,20 +9,20 @@ def getFiles(file_names):
 
 file_names = getFileNames()
 
-nums = map(lambda s: s.split(".")[0].split("_")[1].lstrip("(").rstrip(")"), file_names)
-nums_left = map(lambda s: int(s.split(",")[0]), nums)
-nums_right= map(lambda s: int(s.split(",")[1]), nums)
+nums = list(map(lambda s: s.split(".")[0].split("_")[1].lstrip("(").rstrip(")"), file_names))
+nums_left = list(map(lambda s: int(s.split(",")[0]), nums))
+nums_right= list(map(lambda s: int(s.split(",")[1]), nums))
 numsInt = zip(nums_left, nums_right)
 numOfRows = max(nums_left)+1
 numOfColumns = max(nums_right)+1
-print "Log: Detected %d columns, %d rows" % (numOfColumns, numOfRows)
+print("Log: Detected %d columns, %d rows" % (numOfColumns, numOfRows))
 
 fileNamesWithCoords = zip(file_names, numsInt)
 
 files = getFiles(file_names)
 filesWithCoords = zip(files, numsInt)
 
-print "Log: Creating imgFull with size (%d,%d)." % (numOfColumns, numOfRows)
+print("Log: Creating imgFull with size (%d,%d)." % (numOfColumns, numOfRows))
 imgFull = Image.new('RGB', (500*numOfColumns, 500*numOfRows))
 
 for img, coords in filesWithCoords:
